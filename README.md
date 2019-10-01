@@ -16,6 +16,7 @@ The motivation for this program was for me to practice and improve my personal c
 
 * Python 3.5.2
 * Pygame 1.9.6
+
 ---
 
 ## Contributors
