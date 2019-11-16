@@ -65,8 +65,14 @@ def draw_walls():
 	pygame.draw.rect(win, (200, 200, 215), (0, 0, 6, 500))
 	pygame.draw.rect(win, (200, 200, 215), (494, 0, 6, 500))
 	pygame.draw.rect(win, (200, 200, 215), (0, 0, 500, 6))
+def draw_clock():
+	font_clock = pygame.font.SysFont('timesnewroman', 12)
+	text_clock = font_clock.render(frames_to_time(frames_taken), False, (255, 255, 255))
+	win.blit(text_clock, (10, 480))
 def draw():
 	win.fill((0, 0, 0))
+	if clock:
+		draw_clock()
 	pad.draw_paddle(win)
 	for ball in balls:
 		ball.draw_ball(win)
@@ -93,10 +99,22 @@ def new_level():
 		pygame.time.delay(100)
 		draw()
 		pygame.time.delay(100)
-font = pygame.font.SysFont('timesnewroman', 35)
-text = font.render('Game Completed!', False, (255, 255, 255))
+def frames_to_time(frames):
+	seconds_total = round((frames * 15) / 1000)
+	seconds = seconds_total
+	minutes = 0
+	while seconds > 60:
+		seconds -= 60
+		minutes += 1
+	if seconds < 10:
+		seconds = '0%s' %(seconds)
+	return '%s:%s' % (minutes, seconds)
 def game_complete():
 	game_completed = True
+	font = pygame.font.SysFont('timesnewroman', 35)
+	font_2 = pygame.font.SysFont('timesnewroman', 25)
+	text = font.render('Game Complete!', False, (255, 255, 255))
+	text_2 = font_2.render('Time take:%s' %(frames_to_time(frames_taken)), False, (255, 255, 255))
 	falling_balls = []
 	count = 0
 	while game_completed:
@@ -115,7 +133,8 @@ def game_complete():
 			ball.draw_ball(win)
 		pad.draw_paddle(win)
 		draw_walls()
-		win.blit(text, (120, 200))
+		win.blit(text, (130, 200))
+		win.blit(text_2, (170, 280))
 		pygame.display.update()
 		pygame.time.delay(15)
 '''Game sound variables'''
@@ -143,10 +162,14 @@ fast_ball_count = 0
 power_ball_count = 0
 extra_ball_count = 0
 '''Main loop'''
+frames_taken = 0
 game_completed = False
 run = True
+clock = False
+clock_cool = 0
 while run:
 	pygame.time.delay(15)
+	frames_taken += 1
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			run = False
@@ -261,6 +284,12 @@ while run:
 	if keys[pygame.K_UP] and len(balls) < ball_limit and ball_delay == 0:
 		balls.append(ball2((pad.x + (pad.width//2) + 1), (pad.y - 6), (255, 0, 0), 0, 5, 6))
 		ball_delay = 20
+	if keys[pygame.K_SPACE]:
+		clock = True
+		clock_cool = 100
+	if clock_cool == 0:
+		clock = False
+	clock_cool -= 1
 	if ball_delay > 0:
 		ball_delay -= 1
 	'''Item timmers'''
