@@ -138,7 +138,7 @@ def game_complete():
 		win.blit(text_2, (170, 280))
 		pygame.display.update()
 		pygame.time.delay(15)
-'''Game sound variables'''
+# Game sound variables
 block_break_sound = pygame.mixer.Sound('Game sounds/block_break.wav')
 level_up_sound = pygame.mixer.Sound('Game sounds/level_up.wav')
 paddle_hit_sound = pygame.mixer.Sound('Game sounds/paddle_hit.wav')
@@ -150,11 +150,11 @@ game_complete_sound = pygame.mixer.Sound('Game sounds/game_complete.wav')
 pad = paddle(230, 480, (200, 200, 215), 4, 60, 8)
 level = 0
 total_levels = 5
-'''Ball variables'''
+# Ball variables
 balls = []
 ball_limit = 1
 ball_delay = 0
-'''Other lists and variables'''
+# Other lists and variables
 blocks = []
 items = []
 drop_percentage = 0.3
@@ -162,7 +162,7 @@ big_pad_count = 0
 fast_ball_count = 0
 power_ball_count = 0
 extra_ball_count = 0
-'''Main loop'''
+# Main loop
 frames_taken = 0
 game_completed = False
 run = True
@@ -175,7 +175,7 @@ while run:
 		if event.type == pygame.QUIT:
 			run = False
 	for ball in balls:
-		'''When ball hits paddle'''
+		# When ball hits paddle
 		if ball.y + ball.radius >= pad.y and ball.y - ball.radius <= pad.y + pad.height and ball.x >= pad.x and ball.x <= pad.x + pad.width:
 			ball.yvel *= -1
 			paddle_hit_sound.play()
@@ -188,7 +188,7 @@ while run:
 				else: ball.xvel = 0
 			else: 
 				ball.xvel = int(round((ball.x - center)/6))
-		'''Ball momentum, boundary bounce and game over'''
+		# Ball momentum, boundary bounce and game over
 		if ball.y - 6 >= ball.radius and ball.y <= 500 - ball.radius:
 			ball.y += ball.yvel
 		elif ball.y > 500 - ball.radius:
@@ -219,14 +219,14 @@ while run:
 			wall_hit_sound.play()
 	for block in blocks:
 		for ball in balls:
-			'''Block collision physics'''
+			# Block collision physics
 			if ball.x + ball.radius >= block.x and ball.x - ball.radius <= block.x + block.width and ball.y - ball.radius <= block.y + block.height and ball.y + ball.radius >= block.y:
 				if power_ball_count == 0:
 					if (ball.x - ball.xvel + ball.radius) >= block.x and (ball.x - ball.xvel - ball.radius) <= block.x + block.width:
 						ball.yvel *= -1
 					elif (ball.y - ball.yvel - ball.radius) <= block.y + block.height and (ball.y - ball.yvel + ball.radius) >= block.y:
 						ball.xvel *= -1
-				'''Item generation'''
+				# Item generation
 				chance = random.random()
 				if chance <= drop_percentage:
 					type_percentage = random.random()
@@ -250,7 +250,7 @@ while run:
 			item.y += item.vel
 		else: items.pop(items.index(item))
 		if (item.y + item.height) >= pad.y and item.y <= pad.y + pad.height and item.x + item.width >= pad.x and item.x <= pad.x + pad.width:
-			'''If item is caught'''
+			# If item is caught
 			if item.typ == 'Big paddle' and big_pad_count == 0:
 				power_up_sound.play()
 				pad.x -= 12
@@ -277,7 +277,7 @@ while run:
 				extra_ball_count = 1000
 			items.pop(items.index(item))
 	keys = pygame.key.get_pressed()
-	'''Controls'''
+	# Controls
 	if keys[pygame.K_RIGHT] and (pad.x + pad.width + pad.vel) <= 495:
 		pad.x += pad.vel
 	if keys[pygame.K_LEFT] and (pad.x - pad.vel) >= 5:
@@ -293,7 +293,7 @@ while run:
 	clock_cool -= 1
 	if ball_delay > 0:
 		ball_delay -= 1
-	'''Item timmers'''
+	# Item timmers
 	if big_pad_count == 1:
 		pad.x += 12
 		pad.width -= 24
@@ -317,7 +317,7 @@ while run:
 	elif extra_ball_count > 0:
 		extra_ball_count -= 1
 	if len(blocks) == 0 and level < total_levels:
-		'''Level loading'''
+		# Level loading
 		level += 1
 		pygame.time.delay(200)
 		if level == 1:
