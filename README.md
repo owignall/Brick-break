@@ -21,10 +21,10 @@ The motivation for this program was for me to practice and improve my personal c
 
 ## Contributors
 
-- Oscar Toby Wignall <oscarwignall@btinternet.com>
+- Oscar Wignall <oscarwignall@btinternet.com>
 
 ---
 
 ## License & Copyright
 
-© Oscar Toby Wignall
+© Oscar Wignall
