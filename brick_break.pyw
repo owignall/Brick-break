@@ -3,7 +3,7 @@ This is a brick breaking paddle game with a number of levels
 Could add:
   - Additional levels
   - Additional power ups
-  - Saving heigh scores
+  - Saving high scores
 '''
 import pygame
 import random
