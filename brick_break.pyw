@@ -4,6 +4,7 @@ Could add:
   - Additional levels
   - Additional power ups
   - Saving high scores
+Could also just generally improve collisions physics.
 '''
 import pygame
 import random
