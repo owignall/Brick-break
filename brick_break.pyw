@@ -116,7 +116,7 @@ def game_complete():
 	font = pygame.font.SysFont('timesnewroman', 35)
 	font_2 = pygame.font.SysFont('timesnewroman', 25)
 	text = font.render('Game Complete!', False, (255, 255, 255))
-	text_2 = font_2.render('Time take:%s' %(frames_to_time(frames_taken)), False, (255, 255, 255))
+	text_2 = font_2.render('Time taken: %s' %(frames_to_time(frames_taken)), False, (255, 255, 255))
 	falling_balls = []
 	count = 0
 	while game_completed:
