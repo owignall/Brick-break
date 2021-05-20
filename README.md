@@ -12,7 +12,7 @@ The motivation for this program was for me to practice and improve my personal c
 
 ---
 
-## Prerequisits
+## Prerequisites
 
 * Python 3.5.2
 * Pygame 1.9.6
@@ -21,10 +21,4 @@ The motivation for this program was for me to practice and improve my personal c
 
 ## Contributors
 
-- Oscar Wignall <oscarwignall@btinternet.com>
-
----
-
-## License & Copyright
-
-© Oscar Wignall
+- Oscar Wignall <oscarwignall@outlook.com>
